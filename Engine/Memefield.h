@@ -18,6 +18,7 @@ private:
 	{
 	public:
 		void MemePlanted();
+		bool HasMeme();
 	private:
 		State state = State::Hidden;
 		bool hasMeme = false;
@@ -26,6 +27,7 @@ public:
 	Memefield(int in_nMemes);
 	Tile& AtTile(Vei2 tileLocation);
 	void SpawnMemes(const int nMemes);
+
 private:
 	static constexpr int width = 20;
 	static constexpr int height = 15;
