@@ -21,7 +21,7 @@ private:
 		bool HasMeme();
 		void Draw(Graphics& gfx, Vei2& pixeLoc) const;
 	private:
-		State state = State::Hidden;
+		State state = State::Revealed;
 		bool hasMeme = false;
 		//Vei2 pixelLoc;
 	};
@@ -34,6 +34,7 @@ private:
 	static constexpr int width = 20;
 	static constexpr int height = 15;
 	int nMemes;
+	int i = 0;
 	Tile tiles[width * height];
 	Vei2 TileToPixLoc(Vei2 tileLoc);
 	RectI background;
