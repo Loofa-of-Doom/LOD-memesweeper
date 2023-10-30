@@ -15,18 +15,27 @@ void Memefield::SpawnMemes()
 	{
 		newLoc = { xDist(rng), yDist(rng) };
 		AtTile(newLoc).MemePlanted();
-	} while (i < nMemes && AtTile(newLoc).HasMeme());
+		i++;
+	} while (i < nMemes);// && !AtTile(newLoc).HasMeme());
 }
 
 void Memefield::Draw(Graphics& gfx)
 {
+	int i = 0;
 	for (int y = 0; y < height; y++)
 	{
 		for (int x = 0; x < width; x++)
 		{
-			SpriteCodex::DrawTile0({ x,y }, gfx);
+			Vei2 tileLocation = TileToPixLoc({x,y});
+			tiles[i].Draw(gfx,tileLocation);
+			i++;
 		}
 	}
+}
+
+Vei2 Memefield::TileToPixLoc(Vei2 tileLoc)
+{
+	return Vei2(tileLoc.x * width, tileLoc.y * height);
 }
 
 
@@ -34,8 +43,8 @@ void Memefield::Draw(Graphics& gfx)
 
 Memefield::Memefield(int in_nMemes)
 	:
-	nMemes(in_nMemes),
-	background(0, width * SpriteCodex::tileSize, 0, height * SpriteCodex::tileSize)
+	nMemes(in_nMemes)
+	//background(0, width * SpriteCodex::tileSize, 0, height * SpriteCodex::tileSize)
 {
 }
 
@@ -53,3 +62,20 @@ bool Memefield::Tile::HasMeme()
 {
 	return hasMeme;
 }
+
+void Memefield::Tile::Draw(Graphics& gfx, Vei2& pixelLoc) const
+{
+	switch (state)
+	{
+	case State::Hidden:
+		SpriteCodex::DrawTileButton(pixelLoc, gfx);
+		break;
+	case State::Flagged:
+		SpriteCodex::DrawTileFlag(pixelLoc, gfx);
+		break;
+	case State::Revealed:
+		SpriteCodex::DrawTileBomb(pixelLoc, gfx);
+		break;
+	}
+}
+
