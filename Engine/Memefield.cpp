@@ -21,11 +21,15 @@ void Memefield::SpawnMemes()
 
 void Memefield::Draw(Graphics& gfx)
 {
+	background = { 0, width * SpriteCodex::tileSize, 0, height * SpriteCodex::tileSize };
+	gfx.DrawRect(background, backgroundCol);
+
 	int i = 0;
 	for (int y = 0; y < height; y++)
 	{
 		for (int x = 0; x < width; x++)
 		{
+			
 			Vei2 tileLocation = TileToPixLoc({x,y});
 			tiles[i].Draw(gfx,tileLocation);
 			i++;
@@ -43,8 +47,7 @@ Vei2 Memefield::TileToPixLoc(Vei2 tileLoc)
 
 Memefield::Memefield(int in_nMemes)
 	:
-	nMemes(in_nMemes),
-	background(0, width * SpriteCodex::tileSize, 0, height * SpriteCodex::tileSize)
+	nMemes(in_nMemes)
 {
 }
 
