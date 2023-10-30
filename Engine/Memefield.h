@@ -26,7 +26,8 @@ private:
 public:
 	Memefield(int in_nMemes);
 	Tile& AtTile(Vei2 tileLocation);
-	void SpawnMemes(const int nMemes);
+	void SpawnMemes();
+	void Draw(Graphics& gfx);
 
 private:
 	static constexpr int width = 20;

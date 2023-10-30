@@ -1,7 +1,7 @@
 #include "Memefield.h"
 #include <random>
 
-void Memefield::SpawnMemes(const int nMemes)
+void Memefield::SpawnMemes()
 {
 	std::random_device rd;
 	std::mt19937 rng(rd());
@@ -16,6 +16,17 @@ void Memefield::SpawnMemes(const int nMemes)
 		newLoc = { xDist(rng), yDist(rng) };
 		AtTile(newLoc).MemePlanted();
 	} while (i < nMemes && AtTile(newLoc).HasMeme());
+}
+
+void Memefield::Draw(Graphics& gfx)
+{
+	for (int y = 0; y < height; y++)
+	{
+		for (int x = 0; x < width; x++)
+		{
+			SpriteCodex::DrawTile0({ x,y }, gfx);
+		}
+	}
 }
 
 

@@ -24,7 +24,8 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	field(10)
 {
 }
 
@@ -38,8 +39,10 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	field.SpawnMemes();
 }
 
 void Game::ComposeFrame()
 {
+	field.Draw(gfx);
 }
