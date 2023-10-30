@@ -23,7 +23,7 @@ private:
 	private:
 		State state = State::Hidden;
 		bool hasMeme = false;
-		Vei2 pixelLoc;
+		//Vei2 pixelLoc;
 	};
 public:
 	Memefield(int in_nMemes);
@@ -36,7 +36,8 @@ private:
 	int nMemes;
 	Tile tiles[width * height];
 	Vei2 TileToPixLoc(Vei2 tileLoc);
-	//RectI background;
+	RectI background;
+	Color backgroundCol = Colors::Gray;
 	
 };
 

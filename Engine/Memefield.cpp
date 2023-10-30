@@ -35,7 +35,7 @@ void Memefield::Draw(Graphics& gfx)
 
 Vei2 Memefield::TileToPixLoc(Vei2 tileLoc)
 {
-	return Vei2(tileLoc.x * width, tileLoc.y * height);
+	return Vei2(tileLoc.x * SpriteCodex::tileSize, tileLoc.y * SpriteCodex::tileSize);
 }
 
 
@@ -43,8 +43,8 @@ Vei2 Memefield::TileToPixLoc(Vei2 tileLoc)
 
 Memefield::Memefield(int in_nMemes)
 	:
-	nMemes(in_nMemes)
-	//background(0, width * SpriteCodex::tileSize, 0, height * SpriteCodex::tileSize)
+	nMemes(in_nMemes),
+	background(0, width * SpriteCodex::tileSize, 0, height * SpriteCodex::tileSize)
 {
 }
 
