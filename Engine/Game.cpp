@@ -21,8 +21,9 @@
 #include "MainWindow.h"
 #include "Game.h"
 
-Game::Game( MainWindow& wnd )
+Game::Game(MainWindow& wnd)
 	:
+	timer(),
 	wnd( wnd ),
 	gfx( wnd ),
 	field(10)
@@ -39,16 +40,19 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	frameTime = timer.Mark();
+	nanoSecConv = frameTime * 0.000000001f;
+	flagBuffer += nanoSecConv;
 	field.SpawnMemes();
 	if (wnd.mouse.LeftIsPressed())
 	{
 		field.ClickReveal(wnd.mouse.GetPos());
 
 	}
-	if (wnd.mouse.RightIsPressed())
+	if (wnd.mouse.RightIsPressed() && flagBuffer > 0.5f)
 	{
 		field.ClickFlag(wnd.mouse.GetPos());
-
+		flagBuffer = 0.0f;
 	}
 }
 

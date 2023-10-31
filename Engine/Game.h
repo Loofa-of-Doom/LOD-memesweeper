@@ -24,6 +24,7 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include "Memefield.h"
+#include "Timer.h"
 
 class Game
 {
@@ -39,11 +40,14 @@ private:
 	/*  User Functions              */
 	/********************************/
 private:
+	Timer timer;
 	MainWindow& wnd;
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
 	/********************************/
 	Memefield field;
-	float buffer;
+	float flagBuffer = 0;
+	float frameTime;
+	float nanoSecConv;
 };
