@@ -45,4 +45,5 @@ private:
 	/*  User Variables              */
 	/********************************/
 	Memefield field;
+	float buffer;
 };

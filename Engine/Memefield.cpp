@@ -124,6 +124,14 @@ void Memefield::Tile::SetReveal()
 
 void Memefield::Tile::SetFlag()
 {
-	state = State::Flagged;
+	if (!(state == State::Flagged))
+	{
+		state = State::Flagged;
+	}
+	else
+	{
+		state = State::Hidden;
+	}
+	
 }
 
