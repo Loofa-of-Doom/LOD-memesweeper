@@ -42,7 +42,12 @@ void Game::UpdateModel()
 	field.SpawnMemes();
 	if (wnd.mouse.LeftIsPressed())
 	{
-		field.Reveal(wnd.mouse.GetPos());
+		field.ClickReveal(wnd.mouse.GetPos());
+
+	}
+	if (wnd.mouse.RightIsPressed())
+	{
+		field.ClickFlag(wnd.mouse.GetPos());
 
 	}
 }

@@ -34,7 +34,7 @@ public:
 	void SpawnMemes();
 	void Draw(Graphics& gfx);
 	Vei2 TileToPixLoc(Vei2 tileLoc);
-	void Reveal(Vei2 mouseClick);
+	void ClickReveal(Vei2 mouseClick);
 	void ClickFlag(Vei2 mouseClick);
 	
 private:

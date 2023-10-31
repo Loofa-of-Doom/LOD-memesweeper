@@ -53,15 +53,20 @@ Vei2 Memefield::TileToPixLoc(Vei2 tileLoc)
 	return Vei2(tileLoc.x * SpriteCodex::tileSize, tileLoc.y * SpriteCodex::tileSize);
 }
 
-void Memefield::Reveal(Vei2 mouseClick)
+void Memefield::ClickReveal(Vei2 mouseClick)
+{
+	Vei2 pixelLoc;
+	pixelLoc = mouseClick / SpriteCodex::tileSize;
+	
+	AtTile(pixelLoc).SetReveal();
+}
+
+void Memefield::ClickFlag(Vei2 mouseClick)
 {
 	Vei2 pixelLoc;
 	pixelLoc = mouseClick / SpriteCodex::tileSize;
 
-	//pixelLoc.x = mouseClick.x / width;
-	//pixelLoc.y = mouseClick.y / height;
-	
-	AtTile(pixelLoc).SetReveal();
+	AtTile(pixelLoc).SetFlag();
 }
 
 
@@ -115,5 +120,10 @@ void Memefield::Tile::Draw(Graphics& gfx, Vei2& pixelLoc) const
 void Memefield::Tile::SetReveal()
 {
 	state = State::Revealed;
+}
+
+void Memefield::Tile::SetFlag()
+{
+	state = State::Flagged;
 }
 
