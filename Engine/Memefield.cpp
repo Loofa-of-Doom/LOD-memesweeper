@@ -14,9 +14,14 @@ void Memefield::SpawnMemes()
 		do
 		{
 			newLoc = { xDist(rng), yDist(rng) };
+			while (AtTile(newLoc).HasMeme())
+			{
+				newLoc = { xDist(rng), yDist(rng) };
+			}
 			AtTile(newLoc).MemePlanted();
 			i++;
-		} while (i < nMemes); //|| AtTile(newLoc).HasMeme());
+
+		} while (i < nMemes);
 
 		finishedSpawning = true;
 
