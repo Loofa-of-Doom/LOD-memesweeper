@@ -8,13 +8,21 @@ void Memefield::SpawnMemes()
 	std::uniform_int_distribution<int> xDist(0, width);
 	std::uniform_int_distribution<int> yDist(0, height);
 	Vei2 newLoc;
+	if (!finishedSpawning)
+	{
+		int i = 0;
+		do
+		{
+			newLoc = { xDist(rng), yDist(rng) };
+			AtTile(newLoc).MemePlanted();
+			i++;
+		} while (i < nMemes); //|| AtTile(newLoc).HasMeme());
 
-	 while (iMemeNum < nMemes)// AtTile(newLoc).HasMeme());
-		 {
-			 newLoc = { xDist(rng), yDist(rng) };
-			 AtTile(newLoc).MemePlanted();
-			 iMemeNum++;
-		 }
+		finishedSpawning = true;
+
+	}
+
+
 }
 
 void Memefield::Draw(Graphics& gfx)
@@ -83,19 +91,17 @@ void Memefield::Tile::Draw(Graphics& gfx, Vei2& pixelLoc) const
 		SpriteCodex::DrawTileButton(pixelLoc, gfx);
 		break;
 	case State::Flagged:
-		SpriteCodex::DrawTile0(pixelLoc, gfx);
+		SpriteCodex::DrawTileButton(pixelLoc, gfx);
 		SpriteCodex::DrawTileFlag(pixelLoc, gfx);
 		break;
 	case State::Revealed:
 		if (!hasMeme)
 		{
-			SpriteCodex::DrawTileButton(pixelLoc, gfx);
+			SpriteCodex::DrawTile0(pixelLoc, gfx);
 		}
 		else
 		{
-			SpriteCodex::DrawTileButton(pixelLoc, gfx);
 			SpriteCodex::DrawTileBomb(pixelLoc, gfx);
-
 		}
 		break;
 	}

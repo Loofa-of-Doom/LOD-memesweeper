@@ -21,9 +21,12 @@ private:
 		bool HasMeme();
 		void Draw(Graphics& gfx, Vei2& pixeLoc) const;
 		void SetReveal();
+		void SetFlag();
+		bool HasFlag() const;
 	private:
 		State state = State::Hidden;
 		bool hasMeme = false;
+		bool hasFlag = false;
 	};
 public:
 	Memefield(int in_nMemes);
@@ -32,13 +35,15 @@ public:
 	void Draw(Graphics& gfx);
 	Vei2 TileToPixLoc(Vei2 tileLoc);
 	void Reveal(Vei2 mouseClick);
+	void ClickFlag(Vei2 mouseClick);
+	
 private:
+	bool finishedSpawning = false;
 	static constexpr int width = 20;
 	static constexpr int height = 15;
 	int nMemes;
-	int iMemeNum = 0;
 	Tile tiles[width * height];
-	Color backgroundCol = Colors::Gray;
+	Color backgroundCol = Colors::LightGray;
 	
 };
 
