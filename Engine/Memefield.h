@@ -20,24 +20,24 @@ private:
 		void MemePlanted();
 		bool HasMeme();
 		void Draw(Graphics& gfx, Vei2& pixeLoc) const;
+		void SetReveal();
 	private:
-		State state = State::Revealed;
+		State state = State::Hidden;
 		bool hasMeme = false;
-		//Vei2 pixelLoc;
 	};
 public:
 	Memefield(int in_nMemes);
 	Tile& AtTile(Vei2 tileLocation);
 	void SpawnMemes();
 	void Draw(Graphics& gfx);
+	Vei2 TileToPixLoc(Vei2 tileLoc);
+	void Reveal(Vei2 mouseClick);
 private:
 	static constexpr int width = 20;
 	static constexpr int height = 15;
 	int nMemes;
-	int i = 0;
+	int iMemeNum = 0;
 	Tile tiles[width * height];
-	Vei2 TileToPixLoc(Vei2 tileLoc);
-	RectI background;
 	Color backgroundCol = Colors::Gray;
 	
 };

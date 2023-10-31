@@ -25,7 +25,7 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	field(3)
+	field(100)
 {
 }
 
@@ -40,6 +40,11 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	field.SpawnMemes();
+	if (wnd.mouse.LeftIsPressed())
+	{
+		field.Reveal(wnd.mouse.GetPos());
+
+	}
 }
 
 void Game::ComposeFrame()

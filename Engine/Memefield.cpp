@@ -9,17 +9,17 @@ void Memefield::SpawnMemes()
 	std::uniform_int_distribution<int> yDist(0, height);
 	Vei2 newLoc;
 
-	 while (i < nMemes)// AtTile(newLoc).HasMeme());
+	 while (iMemeNum < nMemes)// AtTile(newLoc).HasMeme());
 		 {
 			 newLoc = { xDist(rng), yDist(rng) };
 			 AtTile(newLoc).MemePlanted();
-			 i++;
+			 iMemeNum++;
 		 }
 }
 
 void Memefield::Draw(Graphics& gfx)
 {
-	background = { 0, width * SpriteCodex::tileSize, 0, height * SpriteCodex::tileSize };
+	RectI background = { 0, width * SpriteCodex::tileSize, 0, height * SpriteCodex::tileSize };
 	gfx.DrawRect(background, backgroundCol);
 
 	int i = 0;
@@ -38,6 +38,17 @@ void Memefield::Draw(Graphics& gfx)
 Vei2 Memefield::TileToPixLoc(Vei2 tileLoc)
 {
 	return Vei2(tileLoc.x * SpriteCodex::tileSize, tileLoc.y * SpriteCodex::tileSize);
+}
+
+void Memefield::Reveal(Vei2 mouseClick)
+{
+	Vei2 pixelLoc;
+	pixelLoc = mouseClick / SpriteCodex::tileSize;
+
+	//pixelLoc.x = mouseClick.x / width;
+	//pixelLoc.y = mouseClick.y / height;
+	
+	AtTile(pixelLoc).SetReveal();
 }
 
 
@@ -88,5 +99,10 @@ void Memefield::Tile::Draw(Graphics& gfx, Vei2& pixelLoc) const
 		}
 		break;
 	}
+}
+
+void Memefield::Tile::SetReveal()
+{
+	state = State::Revealed;
 }
 
