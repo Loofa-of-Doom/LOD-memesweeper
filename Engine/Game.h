@@ -48,6 +48,8 @@ private:
 	/********************************/
 	Memefield field;
 	float flagBuffer = 0;
+	float revealBuffer = 0;
 	float frameTime;
 	float nanoSecConv;
+
 };

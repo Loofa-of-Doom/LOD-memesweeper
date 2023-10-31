@@ -40,14 +40,19 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	frameTime = timer.Mark();
-	nanoSecConv = frameTime * 0.000000001f;
-	flagBuffer += nanoSecConv;
+	//Timer and buffers
+	{
+		frameTime = timer.Mark();
+		nanoSecConv = frameTime * 0.000000001f;
+		flagBuffer += nanoSecConv;
+		revealBuffer += nanoSecConv;
+	}
+
 	field.SpawnMemes();
-	if (wnd.mouse.LeftIsPressed())
+	if (wnd.mouse.LeftIsPressed() && revealBuffer > 0.25f)
 	{
 		field.ClickReveal(wnd.mouse.GetPos());
-
+		revealBuffer = 0.0f;
 	}
 	if (wnd.mouse.RightIsPressed() && flagBuffer > 0.5f)
 	{
