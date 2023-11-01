@@ -48,28 +48,25 @@ void Memefield::Draw(Graphics& gfx)
 	}
 }
 
-Vei2 Memefield::TileToPixLoc(Vei2 tileLoc)
+Vei2 Memefield::TileToPixLoc(Vei2 const tileLoc) const
 {
 	return Vei2(tileLoc.x * SpriteCodex::tileSize, tileLoc.y * SpriteCodex::tileSize);
 }
 
-void Memefield::ClickReveal(Vei2 mouseClick)
+Vei2 Memefield::PixToTileLoc(Vei2 const pixelLoc) const
 {
-	Vei2 pixelLoc;
-	pixelLoc = mouseClick / SpriteCodex::tileSize;
-	
-	AtTile(pixelLoc).SetReveal();
+	return Vei2(pixelLoc / SpriteCodex::tileSize);
+}
+
+void Memefield::ClickReveal(Vei2 mouseClick)
+{	
+	AtTile(PixToTileLoc(mouseClick)).SetReveal();
 }
 
 void Memefield::ClickFlag(Vei2 mouseClick)
 {
-	Vei2 pixelLoc;
-	pixelLoc = mouseClick / SpriteCodex::tileSize;
-
-	AtTile(pixelLoc).SetFlag();
+	AtTile(PixToTileLoc(mouseClick)).SetFlag();
 }
-
-
 
 
 Memefield::Memefield(int in_nMemes)
@@ -133,5 +130,14 @@ void Memefield::Tile::SetFlag()
 		state = State::Hidden;
 	}
 	
+}
+
+void Memefield::Tile::SetNumber(int tileNum)
+{
+	bombsNear = tileNum;
+}
+
+void Memefield::Tile::CheckNeighbor()
+{
 }
 
