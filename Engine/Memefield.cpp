@@ -134,10 +134,51 @@ void Memefield::Tile::SetFlag()
 
 void Memefield::Tile::SetNumber(int tileNum)
 {
-	bombsNear = tileNum;
+	numBombsNear = tileNum;
 }
 
-void Memefield::Tile::CheckNeighbor()
+void Memefield::Tile::UpNum()
 {
+	numBombsNear++;
+}
+
+void Memefield::CheckNeighbor(Vei2 mouseClick)
+{
+	Vei2 tileLoc = PixToTileLoc(mouseClick);
+
+	//3 tiles that are above the tile that was clicked
+	Vei2 topRowStart = tileLoc - Vei2(1, 1);
+	Vei2 topRowEnd = tileLoc + Vei2(1, -1);
+
+	for (topRowStart.x; topRowStart.x < topRowEnd.x; topRowStart.x++)
+	{
+		if (AtTile(topRowStart).HasMeme())
+		{
+			AtTile(tileLoc).UpNum();
+		}
+	}
+
+	//Left and Right Tile
+	Vei2 leftTile = tileLoc + Vei2(-1, 0);
+	Vei2 rightTile = tileLoc + Vei2(1, 0);
+
+	if (AtTile(leftTile).HasMeme() || AtTile(rightTile).HasMeme())
+	{
+		AtTile(tileLoc).UpNum();
+	}
+
+	//3 tiles that are below the tile that was clicked
+	Vei2 bottomRowStart = tileLoc + Vei2(-1, 1);
+	Vei2 bottomRowEnd = tileLoc + Vei2(1, 1);
+
+	for (bottomRowStart.x; bottomRowStart.x < bottomRowEnd.x; bottomRowStart.x++)
+	{
+		if (AtTile(bottomRowStart).HasMeme())
+		{
+			AtTile(tileLoc).UpNum();
+		}
+	}
+
+
 }
 

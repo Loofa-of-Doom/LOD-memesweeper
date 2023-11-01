@@ -23,28 +23,29 @@ private:
 		void SetReveal();
 		void SetFlag();
 		void SetNumber(int tileNum);
+		void UpNum();
 		bool HasFlag() const;
-		void CheckNeighbor();	
 	private:
 		State state = State::Hidden;
 		bool hasMeme = false;
 		bool hasFlag = false;
-		int bombsNear = 0;
+		int numBombsNear = 0;
 	};
 public:
 	Memefield(int in_nMemes);
 
-	//Returns one of the arrays tiles specified at tile location in paramaters 
+	//Returns one of the arrays tiles specified at tile location thats passed through the paramaters 
 	Tile& AtTile(Vei2 tileLocation);
 	void SpawnMemes();
 	void Draw(Graphics& gfx);
 
-	//Tile locaction is a Vect like (3,1) , and different from the array index location
+	//Tile locaction is a Vect like (3,1) , and different from the array index location which is a one value int
 	Vei2 TileToPixLoc(Vei2 const tileLoc) const;
 	Vei2 PixToTileLoc(Vei2 const pixelLoc) const;
 	void ClickReveal(Vei2 mouseClick);
 	void ClickFlag(Vei2 mouseClick);
-	
+	void CheckNeighbor(Vei2 mouseClick);
+
 private:
 	bool finishedSpawning = false;
 	static constexpr int width = 20;
