@@ -59,7 +59,8 @@ Vei2 Memefield::PixToTileLoc(Vei2 const pixelLoc) const
 }
 
 void Memefield::ClickReveal(Vei2 mouseClick)
-{	
+{
+	CheckNeighbor(mouseClick);
 	AtTile(PixToTileLoc(mouseClick)).SetReveal();
 }
 
@@ -104,7 +105,30 @@ void Memefield::Tile::Draw(Graphics& gfx, Vei2& pixelLoc) const
 	case State::Revealed:
 		if (!hasMeme)
 		{
-			SpriteCodex::DrawTile0(pixelLoc, gfx);
+			switch (numBombsNear)
+			{
+			case 0:
+				SpriteCodex::DrawTile0(pixelLoc, gfx);
+				break;
+			case 1:
+				SpriteCodex::DrawTile1(pixelLoc, gfx);
+				break;
+			case 2:
+				SpriteCodex::DrawTile2(pixelLoc, gfx);
+				break;
+			case 3:
+				SpriteCodex::DrawTile3(pixelLoc, gfx);
+				break;
+			case 4:
+				SpriteCodex::DrawTile4(pixelLoc, gfx);
+				break;
+			case 5:
+				SpriteCodex::DrawTile5(pixelLoc, gfx);
+				break;
+			case 6:
+				SpriteCodex::DrawTile6(pixelLoc, gfx);
+				break;
+			}
 		}
 		else
 		{
