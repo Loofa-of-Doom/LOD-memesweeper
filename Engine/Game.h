@@ -33,6 +33,14 @@ public:
 	Game( const Game& ) = delete;
 	Game& operator=( const Game& ) = delete;
 	void Go();
+
+public:
+	enum class GameState
+	{
+		NotStarted,
+		Started,
+		GameOver
+	};
 private:
 	void ComposeFrame();
 	void UpdateModel();
@@ -51,5 +59,7 @@ private:
 	float revealBuffer = 0;
 	float frameTime;
 	float nanoSecConv;
+	int lives = 0;
+	GameState state = GameState::NotStarted;
 
 };

@@ -47,25 +47,30 @@ void Game::UpdateModel()
 		flagBuffer += nanoSecConv;
 		revealBuffer += nanoSecConv;
 	}
-
+	
 	field.SpawnMemes();
-	if (wnd.mouse.LeftIsPressed() && revealBuffer > 0.25f)
+	if (!(state == GameState::GameOver))
 	{
-		field.ClickReveal(wnd.mouse.GetPos());
-		revealBuffer = 0.0f;
+		if (wnd.mouse.LeftIsPressed() && revealBuffer > 0.25f)
+		{
+			field.ClickReveal(wnd.mouse.GetPos());
+				revealBuffer = 0.0f;
+		}
+		if (wnd.mouse.RightIsPressed() && flagBuffer > 0.5f)
+		{
+			field.ClickFlag(wnd.mouse.GetPos());
+				flagBuffer = 0.0f;
+		}
 	}
-	if (wnd.mouse.RightIsPressed() && flagBuffer > 0.5f)
-	{
-		field.ClickFlag(wnd.mouse.GetPos());
-		flagBuffer = 0.0f;
-	}
+	
 }
 
 void Game::ComposeFrame()
 {
 	if (field.IsBlownUp())
 	{
-
+		state = GameState::GameOver;
+		SpriteCodex::DrawGameOver(Vei2{ 400,300 }, gfx);
 	}
 	field.Draw(gfx);
 }
