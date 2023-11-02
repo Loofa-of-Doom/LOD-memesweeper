@@ -55,6 +55,7 @@ private:
 	/*  User Variables              */
 	/********************************/
 	Memefield field;
+	bool isFirstClick = true;
 	float flagBuffer = 0;
 	float revealBuffer = 0;
 	float frameTime;

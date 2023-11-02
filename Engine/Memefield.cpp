@@ -61,13 +61,19 @@ Vei2 Memefield::PixToTileLoc(Vei2 const pixelLoc) const
 void Memefield::ClickReveal(Vei2 mouseClick)
 {
 	Vei2 clickedTileLoc = PixToTileLoc(mouseClick);
-	CheckNeighbor(mouseClick);
-	AtTile(PixToTileLoc(mouseClick)).SetReveal();
-
 	if (AtTile(clickedTileLoc).HasMeme())
 	{
 		blownUp = true;
+		AtTile(PixToTileLoc(mouseClick)).SetReveal();
 	}
+	else
+	{
+		CheckNeighbor(mouseClick);
+		AtTile(PixToTileLoc(mouseClick)).SetReveal();
+	}
+	
+
+	
 }
 
 void Memefield::ClickFlag(Vei2 mouseClick)
