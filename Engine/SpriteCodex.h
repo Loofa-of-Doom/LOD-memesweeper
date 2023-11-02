@@ -25,5 +25,7 @@ public:
 	static void DrawTileFlag( const Vei2& pos,Graphics& gfx );
 	static void DrawTileBomb( const Vei2& pos,Graphics& gfx );
 	static void DrawTileBombRed( const Vei2& pos,Graphics& gfx );
-	static void SpriteCodex::DrawGameOver(const Vei2& center, Graphics& gfx);
+	static void DrawGameOver(const Vei2& center, Graphics& gfx);
+	static void DrawPoo(const Vei2& center, Graphics& gfx);
+	static void DrawReady(const Vei2& center, Graphics& gfx);
 };
