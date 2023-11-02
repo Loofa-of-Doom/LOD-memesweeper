@@ -34,7 +34,7 @@ private:
 public:
 	Memefield(int in_nMemes);
 
-	//Returns one of the arrays tiles specified at tile location thats passed through the paramaters 
+	//AtTile returns one of the arrays tiles specified at tile location thats passed through the paramaters 
 	Tile& AtTile(Vei2 tileLocation);
 	void SpawnMemes();
 	void Draw(Graphics& gfx);
@@ -45,8 +45,10 @@ public:
 	void ClickReveal(Vei2 mouseClick);
 	void ClickFlag(Vei2 mouseClick);
 	void CheckNeighbor(Vei2 mouseClick);
+	bool IsBlownUp();
 
 private:
+	bool blownUp = false;
 	bool finishedSpawning = false;
 	static constexpr int width = 20;
 	static constexpr int height = 15;

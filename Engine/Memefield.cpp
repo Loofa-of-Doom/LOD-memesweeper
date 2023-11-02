@@ -60,8 +60,14 @@ Vei2 Memefield::PixToTileLoc(Vei2 const pixelLoc) const
 
 void Memefield::ClickReveal(Vei2 mouseClick)
 {
+	Vei2 clickedTileLoc = PixToTileLoc(mouseClick);
 	CheckNeighbor(mouseClick);
 	AtTile(PixToTileLoc(mouseClick)).SetReveal();
+
+	if (AtTile(clickedTileLoc).HasMeme())
+	{
+		blownUp = true;
+	}
 }
 
 void Memefield::ClickFlag(Vei2 mouseClick)
@@ -132,7 +138,8 @@ void Memefield::Tile::Draw(Graphics& gfx, Vei2& pixelLoc) const
 		}
 		else
 		{
-			SpriteCodex::DrawTileBomb(pixelLoc, gfx);
+			SpriteCodex::DrawTileBombRed(pixelLoc, gfx);
+			//SpriteCodex::DrawTileBomb(pixelLoc, gfx);
 		}
 		break;
 	}
@@ -170,7 +177,7 @@ void Memefield::CheckNeighbor(Vei2 mouseClick)
 {
 	Vei2 tileLoc = PixToTileLoc(mouseClick);
 
-	//3 tiles that are above the tile that was clicked
+	//the 3 tiles that are above the tile that was clicked
 	Vei2 topRowStart = tileLoc - Vei2(1, 1);
 	Vei2 topRowEnd = tileLoc + Vei2(1, -1);
 
@@ -191,7 +198,7 @@ void Memefield::CheckNeighbor(Vei2 mouseClick)
 		AtTile(tileLoc).UpNum();
 	}
 
-	//3 tiles that are below the tile that was clicked
+	//the 3 tiles that are below the tile that was clicked
 	Vei2 bottomRowStart = tileLoc + Vei2(-1, 1);
 	Vei2 bottomRowEnd = tileLoc + Vei2(1, 1);
 
@@ -204,5 +211,10 @@ void Memefield::CheckNeighbor(Vei2 mouseClick)
 	}
 
 
+}
+
+bool Memefield::IsBlownUp()
+{
+	return blownUp;
 }
 

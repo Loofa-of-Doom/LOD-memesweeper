@@ -63,5 +63,9 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	if (field.IsBlownUp())
+	{
+
+	}
 	field.Draw(gfx);
 }
