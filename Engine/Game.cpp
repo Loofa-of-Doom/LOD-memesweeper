@@ -26,7 +26,7 @@ Game::Game(MainWindow& wnd)
 	timer(),
 	wnd( wnd ),
 	gfx( wnd ),
-	field(100)
+	field(9)
 {
 }
 
@@ -49,9 +49,16 @@ void Game::UpdateModel()
 	}
 	
 	field.SpawnMemes();
-	/*if (!(state == GameState::GameOver))
-	{*/
-		if (wnd.mouse.LeftIsPressed() && revealBuffer > 0.25f)
+	if (!(state == GameState::GameOver))
+	{
+		
+		if (wnd.mouse.LeftIsPressed() && revealBuffer > 0.25f && isFirstClick == true)
+		{
+			field.RemoveMeme(wnd.mouse.GetPos());
+			isFirstClick = false;
+			revealBuffer = 0.0f;
+		}
+		else if (wnd.mouse.LeftIsPressed() && revealBuffer > 0.25f)
 		{
 			field.ClickReveal(wnd.mouse.GetPos());
 				revealBuffer = 0.0f;
@@ -61,7 +68,7 @@ void Game::UpdateModel()
 			field.ClickFlag(wnd.mouse.GetPos());
 				flagBuffer = 0.0f;
 		}
-	//}
+	}
 	
 }
 

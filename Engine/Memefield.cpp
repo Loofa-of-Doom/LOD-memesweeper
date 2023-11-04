@@ -47,6 +47,16 @@ void Memefield::Draw(Graphics& gfx)
 	}
 }
 
+void Memefield::RemoveMeme(Vei2 mouseClick)
+{
+	Vei2 clickedTileLoc = PixToTileLoc(mouseClick);
+	AtTile(clickedTileLoc).DisarmMeme();
+	nMemes--;
+	CheckNeighbor(mouseClick);
+	AtTile(PixToTileLoc(mouseClick)).SetReveal();
+	
+}
+
 Vei2 Memefield::TileToPixLoc(Vei2 const tileLoc) const
 {
 	return Vei2(tileLoc.x * SpriteCodex::tileSize, tileLoc.y * SpriteCodex::tileSize);
@@ -96,6 +106,11 @@ Memefield::Tile& Memefield::AtTile(Vei2 tileLocation)
 void Memefield::Tile::MemePlanted()
 {
 	hasMeme = true;
+}
+
+void Memefield::Tile::DisarmMeme()
+{
+	hasMeme = false;
 }
 
 bool Memefield::Tile::HasMeme()
@@ -235,6 +250,13 @@ void Memefield::CheckNeighbor(Vei2 mouseClick)
 	}
 
 
+}
+
+void Memefield::ClickNoBomb(Vei2 mouseClick)
+{
+	Vei2 clickedTileLoc = PixToTileLoc(mouseClick);
+	CheckNeighbor(mouseClick);
+	AtTile(PixToTileLoc(mouseClick)).SetReveal();
 }
 
 bool Memefield::IsBlownUp()

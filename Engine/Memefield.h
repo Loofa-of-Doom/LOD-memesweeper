@@ -18,6 +18,7 @@ private:
 	{
 	public:
 		void MemePlanted();
+		void DisarmMeme();
 		bool HasMeme();
 		void Draw(Graphics& gfx, Vei2& pixeLoc) const;
 		void SetReveal();
@@ -38,6 +39,7 @@ public:
 	Tile& AtTile(Vei2 tileLocation);
 	void SpawnMemes();
 	void Draw(Graphics& gfx);
+	void RemoveMeme(Vei2 mouseClick);
 
 	//Tile locaction is a Vect like (3,1) , and different from the array index location which is a one value int
 	Vei2 TileToPixLoc(Vei2 const tileLoc) const;
@@ -45,15 +47,18 @@ public:
 	void ClickReveal(Vei2 mouseClick);
 	void ClickFlag(Vei2 mouseClick);
 	void CheckNeighbor(Vei2 mouseClick);
+	void ClickNoBomb(Vei2 mouseClick);
 	bool IsBlownUp();
 	bool IsTileInBounds(Vei2 pixelLoc) const;
 
 private:
+	int nMemes;
+	bool firstClickMade;
 	bool blownUp = false;
 	bool finishedSpawning = false;
-	static constexpr int width = 20;
-	static constexpr int height = 15;
-	int nMemes;
+	static constexpr int width = 3;
+	static constexpr int height = 3;
+	
 	Tile tiles[width * height];
 	Color backgroundCol = Colors::LightGray;
 	RectI background;
