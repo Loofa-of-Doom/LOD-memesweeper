@@ -32,7 +32,6 @@ void Memefield::SpawnMemes()
 
 void Memefield::Draw(Graphics& gfx)
 {
-	RectI background = { 0, width * SpriteCodex::tileSize, 0, height * SpriteCodex::tileSize };
 	gfx.DrawRect(background, backgroundCol);
 
 	int i = 0;
@@ -84,7 +83,8 @@ void Memefield::ClickFlag(Vei2 mouseClick)
 
 Memefield::Memefield(int in_nMemes)
 	:
-	nMemes(in_nMemes)
+	nMemes(in_nMemes),
+	background(0, width* SpriteCodex::tileSize, 0, height* SpriteCodex::tileSize)
 {
 }
 
@@ -187,32 +187,50 @@ void Memefield::CheckNeighbor(Vei2 mouseClick)
 	Vei2 topRowStart = tileLoc - Vei2(1, 1);
 	Vei2 topRowEnd = tileLoc + Vei2(1, -1);
 
-	for (topRowStart.x; topRowStart.x < topRowEnd.x; topRowStart.x++)
+	for (topRowStart.x; topRowStart.x <= topRowEnd.x; topRowStart.x++)
 	{
-		if (AtTile(topRowStart).HasMeme())
+		if (IsTileInBounds(TileToPixLoc(topRowStart)))
 		{
-			AtTile(tileLoc).UpNum();
+			if (AtTile(topRowStart).HasMeme())
+			{
+				AtTile(tileLoc).UpNum();
+			}
 		}
+		
 	}
 
 	//Left and Right Tile
 	Vei2 leftTile = tileLoc + Vei2(-1, 0);
 	Vei2 rightTile = tileLoc + Vei2(1, 0);
 
-	if (AtTile(leftTile).HasMeme() || AtTile(rightTile).HasMeme())
+	if (IsTileInBounds(TileToPixLoc(leftTile)))
 	{
-		AtTile(tileLoc).UpNum();
+		if (AtTile(leftTile).HasMeme())
+		{
+			AtTile(tileLoc).UpNum();
+		}
 	}
+	if (IsTileInBounds(TileToPixLoc(rightTile)))
+	{
+		if (AtTile(rightTile).HasMeme())
+		{
+			AtTile(tileLoc).UpNum();
+		}
+	}
+	
 
 	//the 3 tiles that are below the tile that was clicked
 	Vei2 bottomRowStart = tileLoc + Vei2(-1, 1);
 	Vei2 bottomRowEnd = tileLoc + Vei2(1, 1);
 
-	for (bottomRowStart.x; bottomRowStart.x < bottomRowEnd.x; bottomRowStart.x++)
+	for (bottomRowStart.x; bottomRowStart.x <= bottomRowEnd.x; bottomRowStart.x++)
 	{
-		if (AtTile(bottomRowStart).HasMeme())
+		if (IsTileInBounds(TileToPixLoc(bottomRowStart)))
 		{
-			AtTile(tileLoc).UpNum();
+			if (AtTile(bottomRowStart).HasMeme())
+			{
+				AtTile(tileLoc).UpNum();
+			}
 		}
 	}
 
@@ -222,5 +240,11 @@ void Memefield::CheckNeighbor(Vei2 mouseClick)
 bool Memefield::IsBlownUp()
 {
 	return blownUp;
+}
+
+bool Memefield::IsTileInBounds(Vei2 pixelLoc) const
+{
+	return pixelLoc.x >= background.left && pixelLoc.x <= background.right &&
+		pixelLoc.y >= background.top && pixelLoc.y <= background.bottom;
 }
 

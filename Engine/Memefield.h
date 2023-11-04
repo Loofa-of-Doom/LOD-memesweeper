@@ -46,6 +46,7 @@ public:
 	void ClickFlag(Vei2 mouseClick);
 	void CheckNeighbor(Vei2 mouseClick);
 	bool IsBlownUp();
+	bool IsTileInBounds(Vei2 pixelLoc) const;
 
 private:
 	bool blownUp = false;
@@ -55,6 +56,7 @@ private:
 	int nMemes;
 	Tile tiles[width * height];
 	Color backgroundCol = Colors::LightGray;
+	RectI background;
 	
 };
 

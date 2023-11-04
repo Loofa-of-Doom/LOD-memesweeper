@@ -49,8 +49,8 @@ void Game::UpdateModel()
 	}
 	
 	field.SpawnMemes();
-	if (!(state == GameState::GameOver))
-	{
+	/*if (!(state == GameState::GameOver))
+	{*/
 		if (wnd.mouse.LeftIsPressed() && revealBuffer > 0.25f)
 		{
 			field.ClickReveal(wnd.mouse.GetPos());
@@ -61,7 +61,7 @@ void Game::UpdateModel()
 			field.ClickFlag(wnd.mouse.GetPos());
 				flagBuffer = 0.0f;
 		}
-	}
+	//}
 	
 }
 
