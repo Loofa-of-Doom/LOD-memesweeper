@@ -5,8 +5,8 @@ void Memefield::SpawnMemes()
 {
 	std::random_device rd;
 	std::mt19937 rng(rd());
-	std::uniform_int_distribution<int> xDist(0, width);
-	std::uniform_int_distribution<int> yDist(0, height);
+	std::uniform_int_distribution<int> xDist(0, width - 1);
+	std::uniform_int_distribution<int> yDist(0, height - 1);
 	Vei2 newLoc;
 	if (!finishedSpawning)
 	{
@@ -199,12 +199,12 @@ void Memefield::CheckNeighbor(Vei2 mouseClick)
 	Vei2 tileLoc = PixToTileLoc(mouseClick);
 
 	//the 3 tiles that are above the tile that was clicked
-	Vei2 topRowStart = tileLoc - Vei2(1, 1);
+	Vei2 topRowStart = tileLoc + Vei2(-1, -1);
 	Vei2 topRowEnd = tileLoc + Vei2(1, -1);
 
 	for (topRowStart.x; topRowStart.x <= topRowEnd.x; topRowStart.x++)
 	{
-		if (IsTileInBounds(TileToPixLoc(topRowStart)))
+		if (IsTileInBounds(topRowStart))
 		{
 			if (AtTile(topRowStart).HasMeme())
 			{
@@ -218,14 +218,14 @@ void Memefield::CheckNeighbor(Vei2 mouseClick)
 	Vei2 leftTile = tileLoc + Vei2(-1, 0);
 	Vei2 rightTile = tileLoc + Vei2(1, 0);
 
-	if (IsTileInBounds(TileToPixLoc(leftTile)))
+	if (IsTileInBounds(leftTile))
 	{
 		if (AtTile(leftTile).HasMeme())
 		{
 			AtTile(tileLoc).UpNum();
 		}
 	}
-	if (IsTileInBounds(TileToPixLoc(rightTile)))
+	if (IsTileInBounds(rightTile))
 	{
 		if (AtTile(rightTile).HasMeme())
 		{
@@ -240,7 +240,7 @@ void Memefield::CheckNeighbor(Vei2 mouseClick)
 
 	for (bottomRowStart.x; bottomRowStart.x <= bottomRowEnd.x; bottomRowStart.x++)
 	{
-		if (IsTileInBounds(TileToPixLoc(bottomRowStart)))
+		if (IsTileInBounds(bottomRowStart))
 		{
 			if (AtTile(bottomRowStart).HasMeme())
 			{
@@ -264,9 +264,9 @@ bool Memefield::IsBlownUp()
 	return blownUp;
 }
 
-bool Memefield::IsTileInBounds(Vei2 pixelLoc) const
+bool Memefield::IsTileInBounds(Vei2 tileLoc) const
 {
-	return pixelLoc.x >= background.left && pixelLoc.x <= background.right &&
-		pixelLoc.y >= background.top && pixelLoc.y <= background.bottom;
+	return tileLoc.x >= 0 && tileLoc.x <= width - 1 &&
+		tileLoc.y >= 0 && tileLoc.y <= height - 1;
 }
 

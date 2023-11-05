@@ -49,7 +49,7 @@ public:
 	void CheckNeighbor(Vei2 mouseClick);
 	void ClickNoBomb(Vei2 mouseClick);
 	bool IsBlownUp();
-	bool IsTileInBounds(Vei2 pixelLoc) const;
+	bool IsTileInBounds(Vei2 tileLoc) const;
 
 private:
 	int nMemes;
