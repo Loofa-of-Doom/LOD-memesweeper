@@ -56,8 +56,8 @@ private:
 	bool firstClickMade;
 	bool blownUp = false;
 	bool finishedSpawning = false;
-	static constexpr int width = 3;
-	static constexpr int height = 3;
+	static constexpr int width = 15;
+	static constexpr int height = 10;
 	
 	Tile tiles[width * height];
 	Color backgroundCol = Colors::LightGray;

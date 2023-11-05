@@ -26,7 +26,7 @@ Game::Game(MainWindow& wnd)
 	timer(),
 	wnd( wnd ),
 	gfx( wnd ),
-	field(9)
+	field(50)
 {
 }
 

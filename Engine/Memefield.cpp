@@ -1,5 +1,6 @@
 #include "Memefield.h"
 #include <random>
+#include <assert.h>
 
 void Memefield::SpawnMemes()
 {
@@ -96,6 +97,7 @@ Memefield::Memefield(int in_nMemes)
 	nMemes(in_nMemes),
 	background(0, width* SpriteCodex::tileSize, 0, height* SpriteCodex::tileSize)
 {
+	assert(nMemes < width * height);
 }
 
 Memefield::Tile& Memefield::AtTile(Vei2 tileLocation)
