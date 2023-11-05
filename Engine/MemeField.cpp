@@ -198,6 +198,15 @@ MemeField::MemeField(int nMemes)
 	std::mt19937 rng(rd());
 	std::uniform_int_distribution<int> xDist(0, width - 1);
 	std::uniform_int_distribution<int> yDist(0, height - 1);
+	
+	Tile nextTile;
+	for (Vei2 gridPos = { 0,0 }; gridPos.y < height; gridPos.y++)
+	{
+		for (gridPos.x = 0; gridPos.x < width; gridPos.x++)
+		{
+			TileAt(gridPos).SetPixeLoc(GridToScreen(gridPos));
+		}
+	}
 
 	for (int nSpawned = 0; nSpawned < nMemes; ++nSpawned)
 	{
@@ -227,9 +236,7 @@ void MemeField::Draw(Graphics& gfx)  //*****************************************
 	{
 		for (gridPos.x = 0; gridPos.x < width; gridPos.x++)
 		{
-			nextTile = TileAt(gridPos);
-			nextTile.SetPixeLoc(GridToScreen(gridPos));
-			nextTile.Draw(isFucked, gfx);
+			TileAt(gridPos).Draw(isFucked,gfx);
 		}
 	}
 }
