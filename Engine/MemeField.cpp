@@ -236,7 +236,8 @@ void MemeField::Draw(Graphics& gfx)  //*****************************************
 
 RectI MemeField::GetRect() const
 {
-	return RectI(0, width * SpriteCodex::tileSize, 0, height * SpriteCodex::tileSize);
+	return RectI(field[0].GetPixLoc().x, field[0].GetPixLoc().x + (width * SpriteCodex::tileSize),
+		field[0].GetPixLoc().y , field[0].GetPixLoc().x + (height * SpriteCodex::tileSize));
 }
 
 void MemeField::OnRevealClick(const Vei2& screenPos)
@@ -282,16 +283,6 @@ MemeField::Tile& MemeField::TileAtPixLoc(const Vei2& pixLoc)
 	return field[gridPos.y * width + gridPos.x];
 }
 
-//void MemeField::InitPixLoc(Vei2 gridLocation)
-//{
-//	for (int i = 0; i < width * height; i++)
-//	{
-//		Vei2 
-//		field[i].SetPixeLoc()
-//	}
-//}
-
-
 const MemeField::Tile& MemeField::TileAt(const Vei2& gridPos) const
 {
 	return field[gridPos.y * width + gridPos.x];
@@ -329,7 +320,3 @@ int MemeField::CountNeighborMemes(const Vei2& gridPos)
 	return count;
 }
 
-//Tile& MemeField::GetTile()
-//{
-//	// TODO: insert return statement here
-//}
