@@ -155,6 +155,12 @@ void Memefield::Tile::Draw(Graphics& gfx, Vei2& pixelLoc) const
 			case 6:
 				SpriteCodex::DrawTile6(pixelLoc, gfx);
 				break;
+			case 7:
+				SpriteCodex::DrawTile7(pixelLoc, gfx);
+				break;
+			case 8:
+				SpriteCodex::DrawTile8(pixelLoc, gfx);
+				break;
 			}
 		}
 		else
