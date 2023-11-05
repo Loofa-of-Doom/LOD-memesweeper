@@ -19,6 +19,7 @@ private:
 		void SpawnMeme();
 		bool HasMeme() const;
 		void Draw(const Vei2& screenPos, bool fucked, Graphics& gfx) const;
+		void Draw(bool fucked, Graphics& gfx) const;
 		void Reveal();
 		bool IsRevealed() const;
 		void ToggleFlag();
@@ -30,11 +31,11 @@ private:
 		bool hasMeme = false;
 		int nNeighborMemes = -1;
 		// Starts drawing tile at top left corner of tile
-		Vei2 startingPixLoc = { 200, 200 };
+		Vei2 pixelLoc = { 200, 200 };
 	};
 public:
 	MemeField(int nMemes);
-	void Draw(Graphics& gfx) const;
+	void Draw(Graphics& gfx);
 	RectI GetRect() const;
 	void OnRevealClick(const Vei2& screenPos);
 	void OnFlagClick(const Vei2& screenPos);
@@ -42,7 +43,6 @@ private:
 	Tile& TileAt(const Vei2& gridPos);
 	const Tile& TileAt(const Vei2& gridPos) const;
 	Tile& TileAtPixLoc(const Vei2& pixLoc);
-
 	Vei2 ScreenToGrid(const Vei2& screenPos);
 	Vei2 GridToScreen(const Vei2& gridPos);
 	int CountNeighborMemes(const Vei2& gridPos);
