@@ -251,7 +251,8 @@ void MemeField::OnRevealClick(const Vei2& screenPos)
 {
 	if (!isFucked)
 	{
-		const Vei2 gridPos = ScreenToGrid(screenPos);
+		Vei2 pixelOffset = field[0].GetPixLoc();
+		const Vei2 gridPos = ScreenToGrid(screenPos - pixelOffset);
 		assert(gridPos.x >= 0 && gridPos.x < width && gridPos.y >= 0 && gridPos.y < height);
 		Tile& tile = TileAt(gridPos);
 		if (!tile.IsRevealed() && !tile.IsFlagged())
